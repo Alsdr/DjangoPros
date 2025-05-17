@@ -46,6 +46,8 @@ class Client(ModelBase):
         max_length=12,
         null=False
     )
+    def __str__(self):
+        return f"{self.id} - {self.name}"
 
 class Product(ModelBase):
     description = models.TextField(
@@ -57,6 +59,8 @@ class Product(ModelBase):
         null=False,
         default=0
     )
+    def __str__(self):
+        return f"{self.description[:30]}... - Qtd: {self.quantity}"
 
 class Employee(ModelBase):
     name = models.CharField(
@@ -69,6 +73,8 @@ class Employee(ModelBase):
         max_length=15,
         null=False
     )
+    def __str__(self):
+        return f"{self.id} - {self.name}"
 
 class Sale(ModelBase):
     product = models.ForeignKey(
@@ -94,3 +100,7 @@ class Sale(ModelBase):
         max_length=255,
         null=False
     )
+    def __str__(self):
+        return (f"NF:{self.nrf} - Cliente:{self.client.name},"
+        f"Produto:{self.product.description[30]}..., "
+        f"Funcionario:{self.employee.name}")
